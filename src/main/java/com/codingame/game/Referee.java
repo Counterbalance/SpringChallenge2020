@@ -48,7 +48,12 @@ public class Referee extends AbstractReferee {
         try {
             gameManager.setFrameDuration(500);
             gameManager.setMaxTurns(MAX_TURNS);
-            gameManager.setTurnMaxTime(50);
+            int timeout = 50;
+            try {
+                timeout = Integer.valueOf(gameManager.getGameParameters().getProperty("timeout", "50"));
+            } catch (NumberFormatException e) {
+            }
+            gameManager.setTurnMaxTime(timeout);
 
             game.init(seed);
             sendGlobalInfo();
