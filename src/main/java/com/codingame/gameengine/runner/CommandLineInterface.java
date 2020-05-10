@@ -51,7 +51,8 @@ public class CommandLineInterface {
 			if (cmd.hasOption("d")) {
                 System.setProperty("allow.config.override", "yes");
 				Properties p = new Properties();
-				p.load(new StringReader( String.join( "\n", cmd.getOptionValue("d").split("!")) ));
+				for (String optval : cmd.getOptionValues("d"))
+					p.load(new StringReader( String.join( "\n", optval.split("!")) ));
 				runner.setGameParameters(p);
 			}
 
