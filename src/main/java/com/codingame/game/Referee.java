@@ -135,7 +135,7 @@ public class Referee extends AbstractReferee {
 
     @Override
     public void onEnd() {
-        gameManager.getPlayers().forEach(player -> player.setScore(player.pellets));
+        gameManager.getPlayers().forEach(player -> player.setScore(player.isTimedOut() ? -1 : player.pellets));
         printWinner();
         endScreenModule.setScores(
             gameManager.getPlayers()
